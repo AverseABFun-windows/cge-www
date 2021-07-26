@@ -240,7 +240,6 @@ $castle_sitemap = array(
 
   'documentation' => array('title' => 'Documentation',
     'dropdown' => array(
-      'documentation' => array('title' => 'Getting Started'),
       'manual_intro' => array('title' => 'Manual'),
       'creating_data_intro' => array('title' => 'Creating Game Data'),
       'reference' => array('title' => 'API Reference', 'url' => reference_link()),
@@ -631,22 +630,17 @@ function _castle_sidebar($page, $pageinfo)
   return $result;
 }
 
-function _castle_header_menu($current_page)
+function _castle_header_menu($current_page_top, $current_page_sub)
 {
   global $castle_sitemap;
 
   $result = '
-    <!-- Uncomment this for toggable navbar -->
-    <!--div class="collapse navbar-collapse" id="main-navbar-collapse-1" -->
-    <ul class="nav nav-tabs">';
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">';
 
   foreach($castle_sitemap as $menu_item_page => $menu_item)
   {
     // output <li ...>
-    $result .= '<li class="';
-    if ($menu_item_page == $current_page) {
-      $result .= ' active';
-    }
+    $result .= '<li class="nav-item';
     if (isset($menu_item['dropdown'])) {
       $result .= ' dropdown';
     }
@@ -664,15 +658,26 @@ function _castle_header_menu($current_page)
     }
     $result .= '"';
 
+    $classes = array('nav-link');
+
     // output optional <a> dropdown attributes
     if (isset($menu_item['dropdown'])) {
-      $result .= ' class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"';
+      array_push($classes, 'dropdown-toggle');
+      $result .= ' id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"';
+    }
+
+   if ($menu_item_page == $current_page_top) {
+      array_push($classes, 'active');
+      $result .= ' aria-current="page"';
     }
 
     // output title="..."
     if (isset($menu_item['hint'])) {
       $result .= ' title="' . $menu_item['hint'] . '"';
     }
+
+    // output collected $classes
+    $result .= ' class="' . implode(' ', $classes) . '"';
 
     // output <a> content
     $result .= '>';
@@ -681,14 +686,11 @@ function _castle_header_menu($current_page)
     } else {
       $result .= $menu_item['title'];
     }
-    if (isset($menu_item['dropdown'])) {
-      $result .= ' <span class="caret"></span>';
-    }
     $result .=  '</a>';
 
     // output dropdown contents
     if (isset($menu_item['dropdown'])) {
-      $result .= '<ul class="dropdown-menu">';
+      $result .= '<ul class="dropdown-menu" aria-labelledby="navbarDropdown">';
       foreach ($menu_item['dropdown'] as $dropdown_item_page => $dropdown_item) {
         $result .= '<li>';
 
@@ -700,6 +702,16 @@ function _castle_header_menu($current_page)
           $result .= page_url($dropdown_item_page);
         }
         $result .= '"';
+
+        $classes = array('dropdown-item');
+
+        if ($dropdown_item_page == $current_page_sub) {
+           array_push($classes, 'active');
+           $result .= ' aria-current="page"';
+         }
+
+        // output collected $classes
+        $result .= ' class="' . implode(' ', $classes) . '"';
 
         // output <a> content
         $result .= '>';
@@ -722,9 +734,7 @@ function _castle_header_menu($current_page)
   unset($menu_item_page);
 
   $result .= '
-    </ul>
-    <!-- Uncomment this for toggable navbar -->
-    <!--/div-->';
+    </ul>';
 
   return $result;
 }
@@ -1032,40 +1042,31 @@ function echo_castle_header_suffix($path, $enable_sidebar = true)
     $github_ribbon = '';
   }
 
+  // See Bootstrap5 navbar: https://getbootstrap.com/docs/5.0/components/navbar/
   $rendered = '
-  <nav class="navbar navbar-default">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <!-- Uncomment this for toggable navbar -->
-      <!--
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+      <a class="navbar-brand" href="'.en_page_url(MAIN_PAGE_BASENAME).'">
+        <img alt="" src="' . page_requisite('images/header_icon.png') . '" class="d-inline-block">
+        Castle Game Engine
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
       </button>
-      -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-      <ul class="nav nav-tabs navbar-right">
-        <li><a href="' . PATREON_URL . '" class="navbar-link">Support the engine on<br><img class="patreon-logo" src="' . page_requisite('images/patreonlogoorange_45px.png') . '" alt="Patreon" /></a></li>
-      </ul>
+<!--
+        <div>
+          <a href="' . PATREON_URL . '" class="navbar-link">Support the engine on<br><img class="patreon-logo" src="' . page_requisite('images/patreonlogoorange_45px.png') . '" alt="Patreon" /></a>
+        </ul>
+-->
 
-      <!--button type="button" class="btn btn-default navbar-btn navbar-right" style="margin-right: 0px;"><a href="' . PATREON_URL . '" class="navbar-link">Support us on<br><img style="height: 40px" src="' . page_requisite('images/patreonlogoorange.png') . '" alt="Patreon" /></a></button-->
-
-      <!--p class="navbar-text navbar-right"><a href="' . PATREON_URL . '" class="navbar-link">Support us on<br><img style="height:50px" src="' . page_requisite('images/patreonlogoorange.png') . '" alt="Patreon" /></a></p-->
-
-      <div class="navbar-header">
-        <a class="navbar-brand" href="'.en_page_url(MAIN_PAGE_BASENAME).'">
-          <img alt="" src="' . page_requisite('images/header_icon.png') . '">
-        </a>
-        <a class="navbar-brand" href="'.en_page_url(MAIN_PAGE_BASENAME).'">
-          Castle Game Engine
-        </a>
-      </div>
       ' .
       // TODO: No idea now where to place this, so it doesn't interfere with "patreon"
       // search_box() .
       '
-      ' . _castle_header_menu($path[0]) . '
+      ' . _castle_header_menu($path[0], isset($path[1]) ? $path[1] : null) . '
+      </div>
     </div>
 
     ' . $github_ribbon . '
