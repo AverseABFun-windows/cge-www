@@ -666,7 +666,7 @@ function _castle_header_menu($current_page_top, $current_page_sub)
       $result .= ' id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"';
     }
 
-   if ($menu_item_page == $current_page_top) {
+    if ($menu_item_page == $current_page_top) {
       array_push($classes, 'active');
       $result .= ' aria-current="page"';
     }
@@ -706,9 +706,9 @@ function _castle_header_menu($current_page_top, $current_page_sub)
         $classes = array('dropdown-item');
 
         if ($dropdown_item_page == $current_page_sub) {
-           array_push($classes, 'active');
-           $result .= ' aria-current="page"';
-         }
+          array_push($classes, 'active');
+          $result .= ' aria-current="page"';
+        }
 
         // output collected $classes
         $result .= ' class="' . implode(' ', $classes) . '"';
