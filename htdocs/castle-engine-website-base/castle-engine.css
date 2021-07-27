@@ -3,27 +3,12 @@ body {
   font-family: Inter,"Helvetica Neue",Helvetica,Arial,sans-serif !important;
 }
 
-@media only screen and (max-width : 767px) {
-    .sidebar {
-        /* vertical margin between sidebar and content,
-           on small devices when sidebar is at bottom */
-        margin-top: 1em;
-    }
-}
-
-@media only screen and (min-width : 768px) {
-    .content-near-sidebar {
-        /* horizontal margin from sidebar */
-        /* padding-left: 2em; */
-    }
-}
-
 .fixed-width-content {
-    /* Like Wordpress .wrap */
-    width: 1200px;
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+  /* Like Wordpress .wrap */
+  width: 1200px;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .media-responsive,
@@ -526,32 +511,6 @@ span.news_title.only_anchor {
   font-weight: bold
 }
 
-/* based on Bootstrap panel-footer */
-.panel-follow-us-old {
-  background-color: #f5f5f5;
-  border-bottom-left-radius: 3px;
-  border-bottom-right-radius: 3px;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  padding: 10px 15px;
-  font-size: larger;
-}
-
-/* based on Bootstrap panel-footer */
-.panel-follow-us {
-  background-color: #f5f5f5;
-  border-bottom-left-radius: 3px;
-  border-bottom-right-radius: 3px;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  padding: 10px 15px;
-  font-size: 1.5rem;
-}
-
 /* header ------------------------------------------------------------------- */
 
 .header_breadcrumbs {
@@ -561,26 +520,6 @@ span.news_title.only_anchor {
 .header_breadcrumbs a       { color: #5EB2E5; }
 .header_breadcrumbs a:hover { color: #39C; }
 
-.nav-tabs {
-  /* Separate brand from menu items on navbar */
-  clear: left;
-}
-/* Extra padding for navbar-collapse not needed, as we already have padding
-   from container-fluid.
-   This customization is necessary because of above "clear: both" on nav-tabs. */
-.navbar-collapse {
-  padding-left: 0;
-  padding-right: 0;
-}
-
-.nav-tabs.navbar-right {
-  border-bottom: 0 none;
-  /* In default bootstrap, it is aligned to right only when
-     "min-width: @grid-float-breakpoint".
-     We want it always, as we don't use collapsing, so @grid-float-breakpoint
-     doesn't apply to us. */
-  float: right;
-}
 .patreon-logo {
   height: 45px;
   margin-top: 5px;

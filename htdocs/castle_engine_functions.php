@@ -635,12 +635,12 @@ function _castle_header_menu($current_page_top, $current_page_sub)
   global $castle_sitemap;
 
   $result = '
-    <ul class="navbar-nav me-auto mb-2 mb-lg-0">';
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-self-end">'; // TODO: we don't want align-self-end when collapsed
 
   foreach($castle_sitemap as $menu_item_page => $menu_item)
   {
     // output <li ...>
-    $result .= '<li class="nav-item';
+    $result .= '<li class="nav-item align-self-end';
     if (isset($menu_item['dropdown'])) {
       $result .= ' dropdown';
     }
@@ -1044,10 +1044,10 @@ function echo_castle_header_suffix($path, $enable_sidebar = true)
 
   // See Bootstrap5 navbar: https://getbootstrap.com/docs/5.0/components/navbar/
   $rendered = '
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light"> <!-- nav-tabs py-lg-0 -->
     <div class="container-fluid">
       <a class="navbar-brand" href="'.en_page_url(MAIN_PAGE_BASENAME).'">
-        <img alt="" src="' . page_requisite('images/header_icon.png') . '" class="d-inline-block">
+        <img alt="" src="' . page_requisite('images/header_icon.png') . '" class="d-inline-block align-text-top">
         Castle Game Engine
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
