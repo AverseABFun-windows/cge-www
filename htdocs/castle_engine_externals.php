@@ -206,3 +206,18 @@ function search_box()
 <iframe src="https://duckduckgo.com/search.html?width=\&site=castle-engine.io&prefill=Search Castle Game Engine" style="overflow:hidden;margin:0;padding:0;width:NaNpx;height:40px;" frameborder="0"></iframe>
 EOD;
 }
+
+/* Doesn't work unfortunately: no way to request site:castle-engine in this case.
+
+// Style using Bootstrap5 form following https://getbootstrap.com/docs/5.0/components/navbar/
+function search_box()
+{
+//  if (_castle_disable_externals()) return '';
+  return <<<EOD
+  <form method="get" action="https://duckduckgo.com/">
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+  </form>
+EOD;
+}
+*/

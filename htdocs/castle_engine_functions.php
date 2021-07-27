@@ -1055,17 +1055,15 @@ function echo_castle_header_suffix($path, $enable_sidebar = true)
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-<!--
-        <div>
-          <a href="' . PATREON_URL . '" class="navbar-link">Support the engine on<br><img class="patreon-logo" src="' . page_requisite('images/patreonlogoorange_45px.png') . '" alt="Patreon" /></a>
-        </ul>
--->
-
-      ' .
-      // TODO: No idea now where to place this, so it doesn't interfere with "patreon"
-      // search_box() .
-      '
       ' . _castle_header_menu($path[0], isset($path[1]) ? $path[1] : null) . '
+
+        <div class="d-flex">
+          <a href="' . PATREON_URL . '" class="navbar-link">Support the engine on<br><img class="patreon-logo" src="' . page_requisite('images/patreonlogoorange_45px.png') . '" alt="Patreon" /></a>
+          ' .
+          // Looks bad, and we don't have a place to put it since we have Patreon button already
+          // search_box() .
+          '
+        </div>
       </div>
     </div>
 
