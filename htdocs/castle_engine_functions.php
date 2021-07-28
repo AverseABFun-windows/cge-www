@@ -1080,6 +1080,9 @@ function echo_castle_header_suffix($path, $enable_sidebar = true)
     '<div class="container-fluid">';
   } else {
     $rendered .=
+    // TODO: sidebar on left on desktops.
+    // For some reason order-1/5, order-md-1/5... from https://getbootstrap.com/docs/5.0/layout/columns/
+    // don't work for me.
     '<div class="container-fluid">
       <div class="row">
         <div class="col-sm-9 col-sm-push-3 content-near-sidebar">
